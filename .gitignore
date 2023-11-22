@@ -1,0 +1,5 @@
+#When working with Git, when we want to exclude any files or folders (such as secret.json which contains the API keys, or build folders),
+#we can create a ".gitignore" file and add those file/folder names inside it, like so:
+#Notice that when we run "git status" in the terminal, git no longer tracks those files.
+secret.json
+node_modules/
