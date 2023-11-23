@@ -55,3 +55,11 @@ it means that particular commit is the most current commit of the master branch
 
 - Once a file which has been added to staging or a repository, was modified or changed, Git will recognize it as "M", which stands for "Modified".
 If we want to commit those changes to a repository, we need to treat it like a new file, which will require us to add it to staging, and THEN commiting it again.
+
+- GitHub is just a Remote version of Git. There are many other Remote versions of Git products available in the market, such as GitLab, Bitbucket, etc
+
+- There are a few Github terminology which we should understand. 
+1) Fork: It means copying the code from someone's repository to ours (only when permitted). We can then work with it and call it another product.
+Eg: Very famous example would be Ubuntu, which is a fork of Debian OS.
+
+2) Upstream: This refers to the original repository that we forked from. This is the repository that we originally copied when we created our fork.
