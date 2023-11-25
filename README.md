@@ -42,6 +42,11 @@ The origin here refers to the name of our remote repository (this is different f
 "git push [Insert name of remote repo. Eg: origin] [Insert branch we want to push to. Eg: master] [-u: This flag will set our specified repo name to upstream remote in the git config file] ": Take local repostitory and upload it/ sync to the remote repository (in this case, GitHub). Without push command, source code will only be commited to the local git repository.
 In other words, we can think of push as the remote version of commit. Take note that we should add in the "-u" flag when the remote repository is the final source of truth.
 
+"git fetch": Fetches the latest source code from the remote repostitory to local. Take note that at this point, our local source code does not reflect the latest changes from the GitHub. The reason is that, we need to MERGE the local with the remote target branch (eg: master).
+
+"git merge [Insert the target name/branch we want to merge from the remote repo with the local repo. Eg: origin/master]": Once we fetches the latest source code from the remote repository, we need to merge it to the local repo to get our project folder to reflect thsoe changes.
+If we are unsure of what name/branch we should merge with, click on the branch at the bottom left of Visual studio code to confirm it.
+
 -----------------
 --Git knowledge--
 -----------------
