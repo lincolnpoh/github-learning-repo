@@ -32,6 +32,15 @@ Eg: git commit -m "Initial commit"
 
 'git commit -a -m "[Insert message]"': This command is a shortcut for the combination of "git add ." and 'git commit -m "[Insert message]"'.
 
+"git remote -v": This will return the current info of the remote repo (in this case, GitHub) that we are working with. If Null, it will return nothing.
+
+"git remote show origin": This will show even more information like branches, etc, within the origin, of the remote Git (in this case, GitHub).
+
+"git remote add origin [Insert https for remote .git which can be found in GitHub here]": This command will add a remote https to the current git for us to work with git remotely via GitHub.
+The origin here refers to the name of our remote repository (this is different from the https), which typically has a name of origin, which is ALSO the main source of truth for our code.
+
+"git push [Insert name of remote repo. Eg: origin] [Insert branch we want to push to. Eg: master] [-u: This flag will set our specified repo name to upstream remote in the git config file] ": Take local repostitory and upload it/ sync to the remote repository (in this case, GitHub). Without push command, source code will only be commited to the local git repository.
+In other words, we can think of push as the remote version of commit. Take note that we should add in the "-u" flag when the remote repository is the final source of truth.
 
 -----------------
 --Git knowledge--
@@ -63,3 +72,6 @@ If we want to commit those changes to a repository, we need to treat it like a n
 Eg: Very famous example would be Ubuntu, which is a fork of Debian OS.
 
 2) Upstream: This refers to the original repository that we forked from. This is the repository that we originally copied when we created our fork.
+
+3) Push: This is the remote version of commit. Once we commit locally to Git through "git commit", it will not be uploaded/sync to our remote Git (in this case, GitHub).
+We need to manually commit it to the remote repository, through the command push. Refer to the command section above.
