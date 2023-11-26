@@ -28,7 +28,7 @@ The period here refers to all the files/objects within the current working direc
 'git commit -m "[Insert message/comment/description/reason here]"': This will commit the currently staging files to the repository, along with the provided message.
 Eg: git commit -m "Initial commit"
 
-"git log": This will give us a log of all the past commits
+"git log": This will give us a log of all the past commits. If the log is too long, we could exit by pressing "q" button in the terminal.
 
 'git commit -a -m "[Insert message]"': This command is a shortcut for the combination of "git add ." and 'git commit -m "[Insert message]"'.
 
@@ -49,7 +49,18 @@ If we are unsure of what name/branch we should merge with, click on the branch a
 
 "git pull <[Insert name of repo/ remote name. Eg: origin] [Insert name of target branch. Eg: master] (if we have specified "-u" flag during the git push command, we can skip specifying the remote branch, because Git already know where to pull from.)>": This command combines both the fetch and the merge command into one. 
 
-"git clone [Insert URL of remote repo which ends with ".git".] [Optionally include destination directory to be cloned to. Eg: cloned_project]": Clones an exact copy of a remote repository to our local repo. It also keeps a reference to the original repo that allows us to run command such as git pull from that remote repo.
+"git clone [Insert URL of remote repo which ends with ".git".] [Optionally include destination directory to be cloned to. Eg: cloned_project]": Clones an exact copy of a remote repository to our local repo. It also keeps a reference to the original repo that allows us to run command such as git pull, git log, etc from that remote repo.
+
+"git branch": Will display all the existing branches in the current project directory.
+
+"git branch [Insert name of new branch. Eg: new_feature]": This will add a new branch to our project. Take note that we have to switch to the new branch manually. Take note that VScode will NOT switch to the newly created branch automatically, unless we specifically instruct it to.
+
+"git branch -M [Insert name of the primary branch. Eg: main]": This command allows us to move or rename our branch to something else. Take note that we HAVE to capitalize the flag M.
+Eg: If we execute "git branch -M main", we will be renaming our primary/master branch to "main".
+
+"git branch -d [Insert name of target branch. Eg: new_feature]": This command will delete the specified branch. Take note that it's SAFER and BETTER to use the lowercase "-d" instead of the uppercase"-D". In Git, lowercase "-d" will make sure to ONLY allow deletion of branches which have not been merged with the master/main branch.
+
+-Master branch-
 
 -----------------
 --Git knowledge--
@@ -107,3 +118,12 @@ When we make changes, we usually want to send them back "upstream" so they make 
 This is mostly a social issue of how everyone can coordinate their work rather than a technical requirement of source control. 
 We want to get our changes into the main project so we're not tracking divergent lines of development.
 Sometimes we'll read about package or release managers (the people, not the tool) talking about submitting changes to "upstream". That usually means they had to adjust the original sources so they could create a package for their system. They don't want to keep making those changes, so if they send them "upstream" to the original source, they shouldn't have to deal with the same issue in the next release.
+
+
+------------------------
+--GitHub cool features--
+------------------------
+
+- Did you know we could press the period "." button inside any repo to access the codespaces? A cloud-based version of VScode is also known as a codespace. 
+It is a paid-per-second service. We could access the codespace according to our GitHub plans. Apparently, Free plan users could access it for 120 minutes per month. Just a good-to-know.
+
