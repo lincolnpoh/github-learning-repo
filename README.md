@@ -2,7 +2,7 @@
 # This README.md will be displayed as the main description when commited to Github.
 
 --------------------------
---Git command cheatsheet--
+Git command cheatsheet
 --------------------------
 
 - "git init": Setup Git for the current working project folder
@@ -70,7 +70,7 @@ Eg: If we execute "git branch -M main", we will be renaming our primary/master b
 
 
 -----------------
---Git knowledge--
+Git knowledge
 -----------------
 
 - Git does not work globally, but rather per each and individual project folder. 
@@ -137,7 +137,7 @@ It happens when a particular file, under the has same line, with different code 
 
 
 ------------------------
---GitHub cool features--
+GitHub cool features
 ------------------------
 
 - Did you know we could press the period "." button inside any repo to access the codespaces? A cloud-based version of VScode is also known as a codespace. 
