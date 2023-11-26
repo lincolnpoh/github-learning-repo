@@ -53,14 +53,16 @@ If we are unsure of what name/branch we should merge with, click on the branch a
 
 "git branch": Will display all the existing branches in the current project directory.
 
-"git branch [Insert name of new branch. Eg: new_feature]": This will add a new branch to our project. Take note that we have to switch to the new branch manually. Take note that VScode will NOT switch to the newly created branch automatically, unless we specifically instruct it to.
+"git branch [Insert name of new branch. Eg: new_feature]": This will add a new branch to our project. Take note that we have to switch to the new branch manually. Take note that VScode will NOT switch to the newly created branch automatically, unless we specifically instruct it to by using "checkout" command.
+
+"git checkout [Insert name of target branch]": This will allow us to "switch" or "checkout" to the specified branch. More information regarding checkout could be found under the "Git knowledge section" below.
 
 "git branch -M [Insert name of the primary branch. Eg: main]": This command allows us to move or rename our branch to something else. Take note that we HAVE to capitalize the flag M.
 Eg: If we execute "git branch -M main", we will be renaming our primary/master branch to "main".
 
 "git branch -d [Insert name of target branch. Eg: new_feature]": This command will delete the specified branch. Take note that it's SAFER and BETTER to use the lowercase "-d" instead of the uppercase"-D". In Git, lowercase "-d" will make sure to ONLY allow deletion of branches which have not been merged with the master/main branch.
 
-"git branch -D": Do NOT use this unless we really want to remove the existing branch and frack up our project.
+
 
 -----------------
 --Git knowledge--
