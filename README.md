@@ -53,9 +53,12 @@ If we are unsure of what name/branch we should merge with, click on the branch a
 
 "git branch": Will display all the existing branches in the current project directory.
 
-"git branch [Insert name of new branch. Eg: new_feature]": This will add a new branch to our project. Take note that we have to switch to the new branch manually. Take note that VScode will NOT switch to the newly created branch automatically, unless we specifically instruct it to by using "checkout" command.
+"git branch [Insert name of new branch. Eg: new_feature]": This will add a new branch to our project. Take note that we have to switch to the new branch manually. Take note that VScode will NOT switch to the newly created branch automatically, unless we specifically instruct it to by using "checkout" command. 
+OR, we could more simply checkout to the newly created branch with the command "git checkout -b [Insert name of the new branch. Eg: new_feature]". This is kind of like the git pull, which combines two commands into one (fetch and merge commands).
 
 "git checkout [Insert name of target branch]": This will allow us to "switch" or "checkout" to the specified branch. More information regarding checkout could be found under the "Git knowledge section" below. Fun fact: We could replace "checkout" command with "switch" and the result will be the same.
+
+"git checkout -": This command will allow us to switch between master/main branch with the branch that we are currently working on. Running it once from another branch other than master/main will check out the master/main branch. Running it once more will allow us to switch back to the branch we were previously working on.
 
 "git branch -M [Insert name of the primary branch. Eg: main]": This command allows us to move or rename our branch to something else. Take note that we HAVE to capitalize the flag M.
 Eg: If we execute "git branch -M main", we will be renaming our primary/master branch to "main".
