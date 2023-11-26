@@ -5,68 +5,68 @@
 --Git command cheatsheet--
 --------------------------
 
-"git init": Setup Git for the current working project folder
+- "git init": Setup Git for the current working project folder
 
-"git config --list": Display all the current config info of Git
+- "git config --list": Display all the current config info of Git
 
-"git config --global user.name": Set the user.name property for Git config
+- "git config --global user.name": Set the user.name property for Git config
 
-"git config --global user.email": Set the user.email property for Git config
+- "git config --global user.email": Set the user.email property for Git config
 
-"git status": Will display all the current Git status of the working project, such as untracked files, etc.
+- "git status": Will display all the current Git status of the working project, such as untracked files, etc.
 
-"git add .": Add files to the staging area, so that those objects will be included when the next commit is made.
+- "git add .": Add files to the staging area, so that those objects will be included when the next commit is made.
 The period "." represents all the files in the current working directory/ project folder.
 When executed in Visual studio code, notice objects/files with those "U" icons, which stands for "Untracked", 
 will be changed to "A", which stands for "Added" to the staging area.
 
-"git add [insert filename here]": This will add a specified file to the staging area. Eg: "git add README.md"
+- "git add [insert filename here]": This will add a specified file to the staging area. Eg: "git add README.md"
 
-"git reset .": This will reset the state of those objects/files pended to be added to the staging area, back to "U" (Untracked) status.
+- "git reset .": This will reset the state of those objects/files pended to be added to the staging area, back to "U" (Untracked) status.
 The period here refers to all the files/objects within the current working directory.
 
-'git commit -m "[Insert message/comment/description/reason here]"': This will commit the currently staging files to the repository, along with the provided message.
+- 'git commit -m "[Insert message/comment/description/reason here]"': This will commit the currently staging files to the repository, along with the provided message.
 Eg: git commit -m "Initial commit"
 
-"git log": This will give us a log of all the past commits. If the log is too long, we could exit by pressing "q" button in the terminal.
+- "git log": This will give us a log of all the past commits. If the log is too long, we could exit by pressing "q" button in the terminal.
 
-'git commit -a -m "[Insert message]"': This command is a shortcut for the combination of "git add ." and 'git commit -m "[Insert message]"'. 
+- 'git commit -a -m "[Insert message]"': This command is a shortcut for the combination of "git add ." and 'git commit -m "[Insert message]"'. 
 We could further shorten this command to 'git commit -am "[Insert message]"'
 
-"git remote -v": This will return the current info of the remote repo (in this case, GitHub) that we are working with. If Null, it will return nothing.
+- "git remote -v": This will return the current info of the remote repo (in this case, GitHub) that we are working with. If Null, it will return nothing.
 
-"git remote show origin": This will show even more information like branches, etc, within the origin, of the remote Git (in this case, GitHub).
+- "git remote show origin": This will show even more information like branches, etc, within the origin, of the remote Git (in this case, GitHub).
 
-"git remote add origin [Insert https for remote .git which can be found in GitHub here]": This command will add a remote https to the current git for us to work with git remotely via GitHub.
+- "git remote add origin [Insert https for remote .git which can be found in GitHub here]": This command will add a remote https to the current git for us to work with git remotely via GitHub.
 The origin here refers to the name of our remote repository (this is different from the https), which typically has a name of origin, which is ALSO the main source of truth for our code.
 
-"git push [Insert name of remote repo. Eg: origin] [Insert branch we want to push to. Eg: master] [-u: This flag will set our specified repo name to upstream remote in the git config file] ": Take local repostitory and upload it/ sync to the remote repository (in this case, GitHub). Without push command, source code will only be commited to the local git repository.
+- "git push [Insert name of remote repo. Eg: origin] [Insert branch we want to push to. Eg: master] [-u: This flag will set our specified repo name to upstream remote in the git config file] ": Take local repostitory and upload it/ sync to the remote repository (in this case, GitHub). Without push command, source code will only be commited to the local git repository.
 In other words, we can think of push as the remote version of commit. Take note that we should add in the "-u" flag when the remote repository is the final source of truth.
 
-"git fetch": Fetches the latest source code from the remote repostitory to local. Take note that at this point, our local source code does not reflect the latest changes from the GitHub. The reason is that, we need to MERGE the local with the remote target branch (eg: master).
+- "git fetch": Fetches the latest source code from the remote repostitory to local. Take note that at this point, our local source code does not reflect the latest changes from the GitHub. The reason is that, we need to MERGE the local with the remote target branch (eg: master).
 
-"git merge [Insert the target name/branch we want to merge from the remote repo with the local repo. Eg: origin/master]": Once we fetches the latest source code from the remote repository, we need to merge it to the local repo to get our project folder to reflect those changes.
+- "git merge [Insert the target name/branch we want to merge from the remote repo with the local repo. Eg: origin/master]": Once we fetches the latest source code from the remote repository, we need to merge it to the local repo to get our project folder to reflect those changes.
 If we are unsure of what name/branch we should merge with, click on the branch at the bottom left of Visual studio code to confirm it.
 
-"git merge --abort": This commond is self-explanatory, as it will abort any merge. We might need to execute this command when there is a merge conflict.
+- "git merge --abort": This commond is self-explanatory, as it will abort any merge. We might need to execute this command when there is a merge conflict.
 
-"git pull <[Insert name of repo/ remote name. Eg: origin] [Insert name of target branch. Eg: master] (if we have specified "-u" flag during the git push command, we can skip specifying the remote branch, because Git already know where to pull from.)>": This command combines both the fetch and the merge command into one. 
+- "git pull <[Insert name of repo/ remote name. Eg: origin] [Insert name of target branch. Eg: master] (if we have specified "-u" flag during the git push command, we can skip specifying the remote branch, because Git already know where to pull from.)>": This command combines both the fetch and the merge command into one. 
 
-"git clone [Insert URL of remote repo which ends with ".git".] [Optionally include destination directory to be cloned to. Eg: cloned_project]": Clones an exact copy of a remote repository to our local repo. It also keeps a reference to the original repo that allows us to run command such as git pull, git log, etc from that remote repo.
+- "git clone [Insert URL of remote repo which ends with ".git".] [Optionally include destination directory to be cloned to. Eg: cloned_project]": Clones an exact copy of a remote repository to our local repo. It also keeps a reference to the original repo that allows us to run command such as git pull, git log, etc from that remote repo.
 
-"git branch": Will display all the existing branches in the current project directory.
+- "git branch": Will display all the existing branches in the current project directory.
 
-"git branch [Insert name of new branch. Eg: new_feature]": This will add a new branch to our project. Take note that we have to switch to the new branch manually. Take note that VScode will NOT switch to the newly created branch automatically, unless we specifically instruct it to by using "checkout" command. 
+- "git branch [Insert name of new branch. Eg: new_feature]": This will add a new branch to our project. Take note that we have to switch to the new branch manually. Take note that VScode will NOT switch to the newly created branch automatically, unless we specifically instruct it to by using "checkout" command. 
 OR, we could more simply checkout to the newly created branch with the command "git checkout -b [Insert name of the new branch. Eg: new_feature]". This is kind of like the git pull, which combines two commands into one (fetch and merge commands).
 
-"git checkout [Insert name of target branch]": This will allow us to "switch" or "checkout" to the specified branch. More information regarding checkout could be found under the "Git knowledge section" below. Fun fact: We could replace "checkout" command with "switch" and the result will be the same.
+- "git checkout [Insert name of target branch]": This will allow us to "switch" or "checkout" to the specified branch. More information regarding checkout could be found under the "Git knowledge section" below. Fun fact: We could replace "checkout" command with "switch" and the result will be the same.
 
-"git checkout -": This command will allow us to switch between master/main branch with the branch that we are currently working on. Running it once from another branch other than master/main will check out the master/main branch. Running it once more will allow us to switch back to the branch we were previously working on.
+- "git checkout -": This command will allow us to switch between master/main branch with the branch that we are currently working on. Running it once from another branch other than master/main will check out the master/main branch. Running it once more will allow us to switch back to the branch we were previously working on.
 
-"git branch -M [Insert name of the primary branch. Eg: main]": This command allows us to move or rename our branch to something else. Take note that we HAVE to capitalize the flag M.
+- "git branch -M [Insert name of the primary branch. Eg: main]": This command allows us to move or rename our branch to something else. Take note that we HAVE to capitalize the flag M.
 Eg: If we execute "git branch -M main", we will be renaming our primary/master branch to "main".
 
-"git branch -d [Insert name of target branch. Eg: new_feature]": This command will delete the specified branch. Take note that it's SAFER and BETTER to use the lowercase "-d" instead of the uppercase "-D". In Git, lowercase "-d" will ONLY allow deletion of branches which have been FULLY merged with the master/main branch, whereas uppercase "-D" will delete branches regardless whether if they have been merged to master/main or not.
+- "git branch -d [Insert name of target branch. Eg: new_feature]": This command will delete the specified branch. Take note that it's SAFER and BETTER to use the lowercase "-d" instead of the uppercase "-D". In Git, lowercase "-d" will ONLY allow deletion of branches which have been FULLY merged with the master/main branch, whereas uppercase "-D" will delete branches regardless whether if they have been merged to master/main or not.
 
 
 -----------------
