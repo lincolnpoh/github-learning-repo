@@ -60,7 +60,6 @@ Eg: If we execute "git branch -M main", we will be renaming our primary/master b
 
 "git branch -d [Insert name of target branch. Eg: new_feature]": This command will delete the specified branch. Take note that it's SAFER and BETTER to use the lowercase "-d" instead of the uppercase"-D". In Git, lowercase "-d" will make sure to ONLY allow deletion of branches which have not been merged with the master/main branch.
 
--Master branch-
 
 -----------------
 --Git knowledge--
@@ -81,6 +80,9 @@ For example, when we introduced a bug in a code somewhere, we could quickly roll
 
 - A "HEAD" in Git refers to the most current commit on a branch. Eg: If we see something like "HEAD -> master" in git log, 
 it means that particular commit is the most current commit of the master branch
+
+- "Check-out" is a concept where a file could not be checked out by more than a single developer, because once a file/ source code/ class has been assigned for work under someone, another guy CANNOT make any changes to that same file, as it would technically be really chaotic for multiple developers trying to make changes to a single file. 
+So, what happens is that once a checked out file is done with any edits, it should be staged (by adding it to staging area) and commited, before another developer could check out and work on that same file again.
 
 - Once a file which has been added to staging or a repository, was modified or changed, Git will recognize it as "M", which stands for "Modified".
 If we want to commit those changes to a repository, we need to treat it like a new file, which will require us to add it to staging, and THEN commiting it again.
