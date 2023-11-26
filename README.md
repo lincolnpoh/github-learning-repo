@@ -49,7 +49,7 @@ If we are unsure of what name/branch we should merge with, click on the branch a
 
 "git pull <[Insert name of repo/ remote name. Eg: origin] [Insert name of target branch. Eg: master] (if we have specified "-u" flag during the git push command, we can skip specifying the remote branch, because Git already know where to pull from.)>": This command combines both the fetch and the merge command into one. 
 
-"git clone [Insert URL of remote repo which ends with .git. Eg: https://github.com/lincolnpoh/github-learning-repo.git] [Optionally include destination directory to be cloned to. Eg: cloned_project]": Clones an exact copy of a remote repository to our local repo. It also keeps a reference to the original repo that allows us to run command such as git pull from that remote repo.
+"git clone [Insert URL of remote repo which ends with ".git".] [Optionally include destination directory to be cloned to. Eg: cloned_project]": Clones an exact copy of a remote repository to our local repo. It also keeps a reference to the original repo that allows us to run command such as git pull from that remote repo.
 
 -----------------
 --Git knowledge--
