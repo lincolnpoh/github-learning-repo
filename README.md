@@ -44,8 +44,12 @@ In other words, we can think of push as the remote version of commit. Take note 
 
 "git fetch": Fetches the latest source code from the remote repostitory to local. Take note that at this point, our local source code does not reflect the latest changes from the GitHub. The reason is that, we need to MERGE the local with the remote target branch (eg: master).
 
-"git merge [Insert the target name/branch we want to merge from the remote repo with the local repo. Eg: origin/master]": Once we fetches the latest source code from the remote repository, we need to merge it to the local repo to get our project folder to reflect thsoe changes.
+"git merge [Insert the target name/branch we want to merge from the remote repo with the local repo. Eg: origin/master]": Once we fetches the latest source code from the remote repository, we need to merge it to the local repo to get our project folder to reflect those changes.
 If we are unsure of what name/branch we should merge with, click on the branch at the bottom left of Visual studio code to confirm it.
+
+"git pull <[Insert name of repo/ remote name. Eg: origin] [Insert name of target branch. Eg: master] (if we have specified "-u" flag during the git push command, we can skip specifying the remote branch, because Git already know where to pull from.)>": This command combines both the fetch and the merge command into one. 
+
+"git clone [Insert URL of remote repo which ends with .git. Eg: https://github.com/lincolnpoh/github-learning-repo.git] [Optionally include destination directory to be cloned to. Eg: cloned_project]": Clones an exact copy of a remote repository to our local repo. It also keeps a reference to the original repo that allows us to run command such as git pull from that remote repo.
 
 -----------------
 --Git knowledge--
@@ -72,11 +76,34 @@ If we want to commit those changes to a repository, we need to treat it like a n
 
 - GitHub is just a Remote version of Git. There are many other Remote versions of Git products available in the market, such as GitLab, Bitbucket, etc
 
+- Git has a concept of "remotes". These are like easy nicknames for a repository, so you don't have to use its full URL every time you want to refer to another repository.
+An "origin" is an example of that, and it is just an ALIAS on OUR system/PC for a particular remote repostitory. It's not actually a property of THAT repository.
+In that sense, the same repository could have a different ALIAS, other than origin, for another developer. 
+By doing "git push origin [Insert branchname. Eg: master]", we are pushing to the origin repository, which we setup through the command 
+"git remote add [Name of ALIAS we want to assign. Eg: origin (could be any name we like, but a more commonly known naming convention is origin)] [Insert https for remote .git found in GitHub]".
+We could technically specify the URL directly, when working with git push command, and it will still work out. Eg: "git push git@github.com:git/git.git master"
+However, it is not really practicaly to keep trying to memorize the long URL. Shorten it up with an ALIAS such as origin, and we could simply just specify it to: "git push origin/master"
+We can see what URL belongs to each remote by using: "git remote -v"
+
 - There are a few Github terminology which we should understand. 
 1) Fork: It means copying the code from someone's repository to ours (only when permitted). We can then work with it and call it another product.
 Eg: Very famous example would be Ubuntu, which is a fork of Debian OS.
 
-2) Upstream: This refers to the original repository that we forked from. This is the repository that we originally copied when we created our fork.
+2) Upstream: This refers to the original repository that we forked from. This is the repository that we originally copied when we created our fork. More explanation of upstream and downstream below.
 
 3) Push: This is the remote version of commit. Once we commit locally to Git through "git commit", it will not be uploaded/sync to our remote Git (in this case, GitHub).
 We need to manually commit it to the remote repository, through the command push. Refer to the command section above.
+
+4) Fetch: Fetches the latest source code from the remote repostitory to local. Take note that at this point, our local source code does not reflect the latest changes from the GitHub. The reason is that, we need to MERGE the local with the remote target branch (eg: master).
+
+5) Merge: Once we fetches the latest source code from the remote repository, we need to merge it to the local repo to get our project folder to reflect those changes.
+
+6) Pull: Pull is a combination of Fetch and Merge into one command. Very convinient, though some from the community mentioned it's safer to Fetch and Merge manually. A thing to note is that if we have any modified/ uncommitted source code in our local repostiory, this operation will fail when trying to pull from the remote repo, because the system will not be able to judge which source code to merge since both the local and the remote repo contain latest source code. Git WILL NOT overwrite our local changes with the remote source code. We must have a clear working directory. 
+One way is to commit our local repo first. Another way is to use a technique called "Stash".
+Another important thing is, if our local code is modifying the same line of code that we are trying to pull and merge in from the remote, a Merge conflict will occur.
+
+- More detailed definition of Upstream and downstream: In terms of source control, we're downstream when we copy (clone, checkout, etc) from a repository. Information flowed "downstream" to us.
+When we make changes, we usually want to send them back "upstream" so they make it into that repository so that everyone pulling from the same source is working with all the same changes. 
+This is mostly a social issue of how everyone can coordinate their work rather than a technical requirement of source control. 
+We want to get our changes into the main project so we're not tracking divergent lines of development.
+Sometimes we'll read about package or release managers (the people, not the tool) talking about submitting changes to "upstream". That usually means they had to adjust the original sources so they could create a package for their system. They don't want to keep making those changes, so if they send them "upstream" to the original source, they shouldn't have to deal with the same issue in the next release.
