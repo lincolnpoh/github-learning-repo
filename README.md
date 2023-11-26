@@ -60,6 +60,7 @@ Eg: If we execute "git branch -M main", we will be renaming our primary/master b
 
 "git branch -d [Insert name of target branch. Eg: new_feature]": This command will delete the specified branch. Take note that it's SAFER and BETTER to use the lowercase "-d" instead of the uppercase"-D". In Git, lowercase "-d" will make sure to ONLY allow deletion of branches which have not been merged with the master/main branch.
 
+"git branch -D": Do NOT use this unless we really want to remove the existing branch and frack up our project.
 
 -----------------
 --Git knowledge--
