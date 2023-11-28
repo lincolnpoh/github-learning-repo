@@ -76,7 +76,7 @@ This is kind of like the git pull, which combines two commands into one (fetch a
 - "git checkout -": This command will allow us to switch between master/main branch with the branch that we are currently working on. Running it once from another branch other than master/main will check out the master/main branch. Running it once more will allow us to switch back to the branch we were previously working on.
 
 - "TEST REBASE BRANCH"
--Added another explanation within master.
+-Added another explanation within master. Even further explanation made here.
 -----------------
 Git knowledge
 -----------------
