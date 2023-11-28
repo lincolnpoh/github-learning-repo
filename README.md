@@ -77,6 +77,9 @@ This is kind of like the git pull, which combines two commands into one (fetch a
 
 - "TEST REBASE BRANCH"
 -Added another explanation within master. Even further explanation made here.
+
+
+
 -----------------
 Git knowledge
 -----------------
@@ -94,8 +97,10 @@ Before we can take a snapshot, or more precisely "commit", we need to add object
 Every commit contains a unique ID that Git can track those differences in those file than in other commits, which we can rollback to anytime during development.
 For example, when we introduced a bug in a code somewhere, we could quickly rollback to a previous state if necessary.
 
-- A "HEAD" in Git refers to the most current commit on a branch. Eg: If we see something like "HEAD -> master" in git log, 
-it means that particular commit is the most current commit of the master branch
+- A "HEAD" in Git refers to US. It points to whatever WE checked out. It follows us wherever we go, whatever we do. 
+If we make a commit, HEAD will move to it. If we checkout something, HEAD will move to it. Whatever we do, if we have moved somewhere new in our commit history, HEAD will move along with us.
+Eg: If we saw something like "HEAD -> master" in git log, 
+it means that we (HEAD) are currently in the most current commit of the master branch.
 
 - "Check-out" is a concept where a file could not be checked out by more than a single developer, because once a file/ source code/ class has been assigned for work under someone, another guy CANNOT make any changes to that same file, as it would technically be really chaotic for multiple developers trying to make changes to a single file. 
 So, what happens is that once a checked out file is done with any edits, it should be staged (by adding it to staging area) and commited, before another developer could check out and work on that same file again.
