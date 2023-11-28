@@ -48,8 +48,9 @@ In other words, we can think of push as the remote version of commit. Take note 
 - "git merge [Insert the target remote repo name/branch we want to merge from the remote repo with the local repo. Eg: origin/master]": Once we fetches the latest source code from the remote repository, we need to merge it to the local repo to get our project folder to reflect those changes.
 If we are unsure of what name/branch we should merge with, click on the branch at the bottom left of Visual studio code to confirm it.
 
-- "git rebase [Insert the target remote repo name/branch we want to merge from the remote repo with the local repo. Eg: origin/master]": Has the same purpose as merge, in that it allows us to merge two different branches. However, the result is kind of different.
-Rebase will ...CONTINUE HERE
+- "git rebase [Insert the target remote repo name/branch we want to merge from the remote repo with the local repo. Eg: origin/master]": Has the same purpose as merge, in we use it to merge two different branches. However, the result is kind of different.
+Rebase will allow our branch to stay up-to-date with all the latest commits from the other specified branch.
+Whereas for merge, we will have to keep fetching & merging from the branch of our interest.
 
 - "git merge --abort": This commond is self-explanatory, as it will abort any merge. We might need to execute this command when there is a merge conflict.
 
