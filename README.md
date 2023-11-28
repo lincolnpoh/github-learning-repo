@@ -45,8 +45,11 @@ In other words, we can think of push as the remote version of commit. Take note 
 
 - "git fetch": Fetches the latest source code from the remote repostitory to local. Take note that at this point, our local source code does not reflect the latest changes from the GitHub. The reason is that, we need to MERGE the local with the remote target branch (eg: master).
 
-- "git merge [Insert the target name/branch we want to merge from the remote repo with the local repo. Eg: origin/master]": Once we fetches the latest source code from the remote repository, we need to merge it to the local repo to get our project folder to reflect those changes.
+- "git merge [Insert the target remote repo name/branch we want to merge from the remote repo with the local repo. Eg: origin/master]": Once we fetches the latest source code from the remote repository, we need to merge it to the local repo to get our project folder to reflect those changes.
 If we are unsure of what name/branch we should merge with, click on the branch at the bottom left of Visual studio code to confirm it.
+
+- "git rebase [Insert the target remote repo name/branch we want to merge from the remote repo with the local repo. Eg: origin/master]": Has the same purpose as merge, in that it allows us to merge two different branches. However, the result is kind of different.
+Rebase will ...CONTINUE HERE
 
 - "git merge --abort": This commond is self-explanatory, as it will abort any merge. We might need to execute this command when there is a merge conflict.
 
@@ -59,14 +62,18 @@ If we are unsure of what name/branch we should merge with, click on the branch a
 - "git branch [Insert name of new branch. Eg: new_feature]": This will add a new branch to our project. Take note that we have to switch to the new branch manually. Take note that VScode will NOT switch to the newly created branch automatically, unless we specifically instruct it to by using "checkout" command. 
 OR, we could more simply checkout to the newly created branch with the command "git checkout -b [Insert name of the new branch. Eg: new_feature]". This is kind of like the git pull, which combines two commands into one (fetch and merge commands).
 
-- "git checkout [Insert name of target branch]": This will allow us to "switch" or "checkout" to the specified branch. More information regarding checkout could be found under the "Git knowledge section" below. Fun fact: We could replace "checkout" command with "switch" and the result will be the same.
-
-- "git checkout -": This command will allow us to switch between master/main branch with the branch that we are currently working on. Running it once from another branch other than master/main will check out the master/main branch. Running it once more will allow us to switch back to the branch we were previously working on.
-
 - "git branch -M [Insert name of the primary branch. Eg: main]": This command allows us to move or rename our branch to something else. Take note that we HAVE to capitalize the flag M.
 Eg: If we execute "git branch -M main", we will be renaming our primary/master branch to "main".
 
 - "git branch -d [Insert name of target branch. Eg: new_feature]": This command will delete the specified branch. Take note that it's SAFER and BETTER to use the lowercase "-d" instead of the uppercase "-D". In Git, lowercase "-d" will ONLY allow deletion of branches which have been FULLY merged with the master/main branch, whereas uppercase "-D" will delete branches regardless whether if they have been merged to master/main or not.
+
+- "git checkout [Insert name of target branch]": This will allow us to "switch" or "checkout" to the specified branch. More information regarding checkout could be found under the "Git knowledge section" below. Fun fact: We could replace "checkout" command with "switch" and the result will be the same.
+
+- "git checkout -b [Insert name of the new branch. Eg: new_feature]": This command allows us to checkout to the newly created branch which we specified through the -b flag. 
+This is kind of like the git pull, which combines two commands into one (fetch and merge commands).
+
+- "git checkout -": This command will allow us to switch between master/main branch with the branch that we are currently working on. Running it once from another branch other than master/main will check out the master/main branch. Running it once more will allow us to switch back to the branch we were previously working on.
+
 
 
 -----------------
@@ -110,6 +117,11 @@ We can see what URL belongs to each remote by using: "git remote -v"
 1) Fork: It means copying the code from someone's GitHub repository to our GitHub repository, without affecting the original repository. We can then work with it and call it another product.
 One good thing to note is that when we fork, we can fetch updates from the original GitHub repo, which is known as the upstream repository.
 Eg: Very famous example would be Ubuntu, which is a fork of Debian OS.
+Once we forked a Github repo, we need to git clone it into our local system so that we can make our own changes to it. Before making any changes, make sure to create a new branch.
+After making changes to the new branch, push it to our remote git repo, and then finally make a pull request to the upstream.
+A good thing to take note is that, when working with the forked locally, we can keep it in sync with the original, by adding the target upstream/original link to a remote/alias. A good alias/remote name for it would be "upstream". The command for it is: "git remote add upstream [Insert target upstream/original URL .git]"
+Once there is any changes done in the upstream/original repo, we can first fetch from the upstream to our local repo through the fetch command: "git fetch upstream".
+Next, once we have fetched the data, we apply the changes to our local system through the rebase command: "git rebase upstream/master". This will sync our local repo with the latest upstream repo source code.
 
 2) Upstream: This refers to the original repository that we forked from. This is the repository that we originally copied when we created our fork. More explanation of upstream and downstream below.
 
