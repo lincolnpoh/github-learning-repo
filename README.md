@@ -93,7 +93,9 @@ This is kind of like the git pull, which combines two commands into one (fetch a
 
 - "git checkout -": This command will allow us to switch between master/main branch with the branch that we are currently working on. Running it once from another branch other than master/main will check out the master/main branch. Running it once more will allow us to switch back to the branch we were previously working on.
 
+- "git reset": This command will unstage all files which have been added (known as staged as well). It won't modify or delete anything, just unstage all staged files.
 
+- "git reset [Insert commit ID found through "git log" command. Eg: 63756711834cbb6a5e56c48db770bf1d440b2190]": This will allow us to reset back to a previous commit state. The HEAD will now be moved to that specified commit ID. Also, DO NOT reset code on a remote repository in GitHub. It will screw up the git history.
 
 
 
