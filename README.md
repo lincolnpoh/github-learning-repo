@@ -48,11 +48,29 @@ In other words, we can think of push as the remote version of commit. Take note 
 - "git merge [Insert the target remote repo name/branch we want to merge from the remote repo with the local repo. Eg: origin/master]": Once we fetches the latest source code from the remote repository, we need to merge it to the local repo to get our project folder to reflect those changes.
 If we are unsure of what name/branch we should merge with, click on the branch at the bottom left of Visual studio code to confirm it.
 
-- "git rebase [Insert the target remote repo name/branch we want to merge from the remote repo with the local repo. Eg: origin/master]": Has the same purpose as merge, in we use it to merge two different branches. However, the result is kind of different.
-Rebase will allow our branch to stay up-to-date with all the latest commits from the other specified branch.
-Whereas for merge, we will have to keep fetching & merging from the branch of our interest.
+- "git merge --abort": This command is self-explanatory, as it will abort any merge. We might need to execute this command when there is a merge conflict.
 
-- "git merge --abort": This commond is self-explanatory, as it will abort any merge. We might need to execute this command when there is a merge conflict.
+- "git merge --squash [Insert target branch to merge & squash]": This command will merge the target branch, into the currently checkout branch, as well as "squashing" (which literally mean to crush or squeeze something with force so that it becomes flat) everything commited in the target branch, so that the final result in the merged (checked-out) branch will only show the summary of "Merge branch [Target branch] into branch [Checked out branch]" in git log.
+Basically this is the same as merge, except for the fact that it leaves a clean git log history in the merged branch.
+
+- "git rebase [Insert the target remote repo name/branch we want to merge from the remote repo with the local repo. Eg: origin/master]": Has the same purpose as merge, in we use it to merge two different branches. We usually use rebase when working with a forked repo, in our local repo, to be in sync with the upstream for the master or main branch.
+Before using rebase, remember the golden rule: Do NOT rebase any of our own repo into ANY public branches, potentially used by other developers. 
+This will cause the public branch history to get altered (eg: the master or main branch git history will get altered with our own repo).
+Why is this the case? Merge and rebase achieve the same merge result, but the process and its real end result is kind of different.
+Rebase will merge specified branch to the current checkout branch, by moving the entire current checkout branch to begin on the tip of the specified branch.
+Eg: if we execute "git rebase master" while "feature" branch has been checked out, it will end up with the following result:
+[master commit 1] <- [master commit 2] <- [feature commit 1] <- [feature commit 2] <- [feature done commit].
+Rebasing will effectively incorporate all of the new commits of "feature" branch in "master" branch, as if we developed "feature" directly INSIDE the "master" branch. 
+Whereas if we were to git merge "master" into "feature" branch, it will result in the "merging" being logged: 
+[master commit 1] <- [master commit 2] <- [feature commit 1] <- [feature commit 2] <- [feature done commit] <- [Merged feature branch with master branch].
+Rebasing has several benefits: 
+(1) eliminates the unnecessary merge commits required by git merge. 
+(2) results in a perfectly linear project history—we can follow the tip of "feature" branch all the way to the beginning of the project.
+However, by using rebase, we have the following demerits:
+(1) users can’t track how and when commits were merged on the target branch
+(2) rebase won’t work with pull requests since we can’t see minor changes someone else made
+(3) rebase makes us resolve conflicts in the order that were created to continue the rebase. Unfortunately, this means more work for us, as we may need to fix the same conflicts repeatedly
+(4) rebase lowers the feature down to a small number of commits, making it challenging to see the context
 
 - "git pull <[Insert name of repo/ remote name. Eg: origin] [Insert name of target branch. Eg: master] (if we have specified "-u" flag during the git push command, we can skip specifying the remote branch, because Git already know where to pull from.)>": This command combines both the fetch and the merge command into one. 
 
@@ -75,8 +93,7 @@ This is kind of like the git pull, which combines two commands into one (fetch a
 
 - "git checkout -": This command will allow us to switch between master/main branch with the branch that we are currently working on. Running it once from another branch other than master/main will check out the master/main branch. Running it once more will allow us to switch back to the branch we were previously working on.
 
-- "TEST REBASE BRANCH"
--Added another explanation within master. Even further explanation made here.
+
 
 
 
@@ -123,11 +140,14 @@ We can see what URL belongs to each remote by using: "git remote -v"
 1) Fork: It means copying the code from someone's GitHub repository to our GitHub repository, without affecting the original repository. We can then work with it and call it another product.
 One good thing to note is that when we fork, we can fetch updates from the original GitHub repo, which is known as the upstream repository.
 Eg: Very famous example would be Ubuntu, which is a fork of Debian OS.
-Once we forked a Github repo, we need to git clone it into our local system so that we can make our own changes to it. Before making any changes, make sure to create a new branch.
-After making changes to the new branch, push it to our remote git repo, and then finally make a pull request to the upstream.
-A good thing to take note is that, when working with the forked locally, we can keep it in sync with the original, by adding the target upstream/original link to a remote/alias. A good alias/remote name for it would be "upstream". The command for it is: "git remote add upstream [Insert target upstream/original URL .git]"
-Once there is any changes done in the upstream/original repo, we can first fetch from the upstream to our local repo through the fetch command: "git fetch upstream".
-Next, once we have fetched the data, we apply the changes to our local system through the rebase command: "git rebase upstream/master". This will sync our local repo with the latest upstream repo source code.
+Once we forked a Github repo, we need to clone (through "git clone" command) it into our local system so that we can make our own changes to it. 
+Before making any changes, make sure to create a new branch.
+After making changes to the new branch, push it to our forked remote git repo, and then finally make a pull request to the upstream.
+A good thing to take note is that, when working with the forked locally, we can keep it in sync with the original, by adding the target upstream/original link to a remote/alias. A good alias/remote name for it would be "upstream". The command for it is: "git remote add upstream [Insert target upstream/original URL .git]". 
+We can confirm we have added by running "git config --list" and locate the "upstream" property.
+*If there is any update or changes in source code in the upstream/original repo, we can first fetch from the upstream to our local repo through the fetch command: "git fetch upstream".
+Next, once we have fetched the data, we apply the changes to our local system through the rebase command: "git rebase upstream/master". This will sync our local repo "master" branch with the latest upstream repo source code. ***Be very careful NOT to rebase our created branch with the master branch, as it will integrate our own created branch into the master branch, which alters the git history of the master branch, once we make a pull request in the upstream. This will have fatal consequences since master branch is a public branch, used by other people.
+For more info regarding rebase, refer to the command section above.
 
 2) Upstream: This refers to the original repository that we forked from. This is the repository that we originally copied when we created our fork. More explanation of upstream and downstream below.
 
@@ -152,6 +172,10 @@ Sometimes we'll read about package or release managers (the people, not the tool
 
 - Merge conflicts: A merge conflict is one of the scariest thing when working with Git. In VScode, any files that has a merge conflict will be highlighted with an exclamation mark symbol.
 It happens when a particular file, under the has same line, with different code modification while trying to merge two branches, as Git cannot figure out which code to use.
+Once there is a merge conflict, we have to two options:
+1) to abort the merge, by executing "git merge --abort". This will get us to the original state before the merge started.
+2) solve the conflict. Then, we WILL have to manually make a commit (with the "git add ." and "git commit -m" commands, or simply "git commit -am" command), which is called a merge commit, which is required if we are dealing with conflicts. 
+In normal cases, where we don't have to deal with merge conflicts, merging and commiting happens automatically with a fast-forward. However, with merge conflicts, we handle the commit ourself.
 
 
 ------------------------
