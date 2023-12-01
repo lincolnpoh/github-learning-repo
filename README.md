@@ -95,14 +95,13 @@ This is kind of like the git pull, which combines two commands into one (fetch a
 
 - "git reset": This command will unstage all files which have been added (known as staged as well). It won't modify or delete anything, just unstage all staged files.
 
-- "git reset [Insert commit ID found through "git log" command. Eg: 63756711834cbb6a5e56c48db770bf1d440b2190]": This will allow us to reset back to a previous commit state. The HEAD will now be moved to that specified commit ID. 
+- "git reset [Insert commit ID found through "git log" command. Eg: 63756711834cbb6a5e56c48db770bf1d440b2190]": This will allow us to reset back to a previous commit state. The HEAD will now be moved to that specified commit ID.
 
 - "git reset --hard [Insert commit ID we want to reset it back to. Eg: 63756711834cbb6a5e56c48db770bf1d440b2190]": This will allow us to HARD reset everything back to the specified commit ID. What this exactly mean is that, if we added or modified ANY files after the specified commit ID, files which have been added will be COMPLETELY DELETED, and files which were modified will be reset to the state of that commit ID we specified. This is a dangerous reset, so handle with care before proceed with executing this command. It is usually much safer to just execute without the "--hard" flag. 
 *** Be careful, DO NOT RESET code on a remote repository in GitHub if it has been PUSHED to it. Other developers might have already been working on that particular code, and if we were to remove it, chaos will fall upon all. If were have to, use "git revert" instead. More explanation below.
 
 - "git revert [Insert commit ID to want to revert back to. Eg: 63756711834cbb6a5e56c48db770bf1d440b2190]": Revert command works almost like reset, in that it will revert our changes back to the point of commit Id where we specified. It will also remove any files that were added after the specified commit ID.
 When a commit has been pushed to a remote repo in GitHub
-
 
 
 -----------------
