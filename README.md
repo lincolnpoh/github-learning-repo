@@ -28,6 +28,11 @@ The period here refers to all the files/objects within the current working direc
 - 'git commit -m "[Insert message/comment/description/reason here]"': This will commit the currently staging files to the repository, along with the provided message.
 Eg: git commit -m "Initial commit"
 
+- 'git commit --amend -m "[Insert the comment we want to replace with]"': --amend flag is a very useful and convinient flag for us to use when dealing with commits.
+Sometimes, we might want to fix a comment which we commited, maybe due to typo error, or just bad choice of words. We fix it with the --amend flag, which allow us to amend our previous commit. Note that we CANNOT specify a specific commit Id. We could only amend the very previous commit.
+
+- "git commit --amend --no-edit": When dealing with "git commit", adding the --amend flag along with "--no-edit" flag enables us to add staged changes (which we might have forgotten to add during committing), without updating the commit message. Very useful to keep note of.
+
 - "git log": This will give us a log of all the past commits. If the log is too long, we could exit by pressing "q" button in the terminal.
 
 - 'git commit -a -m "[Insert message]"': This command is a shortcut for the combination of "git add ." and 'git commit -m "[Insert message]"'. 
@@ -93,15 +98,37 @@ This is kind of like the git pull, which combines two commands into one (fetch a
 
 - "git checkout -": This command will allow us to switch between master/main branch with the branch that we are currently working on. Running it once from another branch other than master/main will check out the master/main branch. Running it once more will allow us to switch back to the branch we were previously working on.
 
-- "git reset": This command will unstage all files which have been added (known as staged as well). It won't modify or delete anything, just unstage all staged files.
+- "git reset": This command will unstage all files which have been added (known as staged as well). It won't modify or delete anything, just unstage all added/staged files.
 
-- "git reset [Insert commit ID found through "git log" command. Eg: 63756711834cbb6a5e56c48db770bf1d440b2190]": This will allow us to reset back to a previous commit state. The HEAD will now be moved to that specified commit ID.
+- "git reset [Insert commit ID found through "git log" command. Eg: 63756711834cbb6a5e56c48db770bf1d440b2190]": This will allow us to reset back to a previous commit state. The HEAD will now be moved to that specified commit ID. 
+*IMPORTANT: Take note that during this stage, if we still cannot see the changes rolled back, we need to run the "git restore ." command, which will reflect the changes to our current project files.
 
 - "git reset --hard [Insert commit ID we want to reset it back to. Eg: 63756711834cbb6a5e56c48db770bf1d440b2190]": This will allow us to HARD reset everything back to the specified commit ID. What this exactly mean is that, if we added or modified ANY files after the specified commit ID, files which have been added will be COMPLETELY DELETED, and files which were modified will be reset to the state of that commit ID we specified. This is a dangerous reset, so handle with care before proceed with executing this command. It is usually much safer to just execute without the "--hard" flag. 
 *** Be careful, DO NOT RESET code on a remote repository in GitHub if it has been PUSHED to it. Other developers might have already been working on that particular code, and if we were to remove it, chaos will fall upon all. If were have to, use "git revert" instead. More explanation below.
 
-- "git revert [Insert commit ID to want to revert back to. Eg: 63756711834cbb6a5e56c48db770bf1d440b2190]": Revert command works almost like reset, in that it will revert our changes back to the point of commit Id where we specified. It will also remove any files that were added after the specified commit ID.
-When a commit has been pushed to a remote repo in GitHub
+- "git revert [Insert commit ID to want to revert back to. Eg: 63756711834cbb6a5e56c48db770bf1d440b2190]": Revert command works almost like reset. It will also remove any files that were added after the specified commit ID. Also, revert is generally more safer to undo things, when compared to "git reset". Why?
+Because revert has one big difference compared with reset, in that instead of restoring to the point of commit Id where we specified, "git revert" will UNDO the changes we did on that particular specified commit ID, and perform an AUTO COMMIT AFTER UNDOING that commit Id. For eg, consider the following scenario:
+1) "git log" returns 3 commit Ids: 
+commit 6d967aa6432533ae41b76d9c28c73cb45fe7fca7 (HEAD -> master)
+    Comment: third commit
+commit 386a393813e9717e5b0a580de5b0b451804a6b71
+    Comment: second commit
+commit 8a28253e02bca12162967da2eff04a2a0b7f5568
+    Comment: first commit
+2) If we perform "git revert 6d967aa6432533ae41b76d9c28c73cb45fe7fca7", Git will UNDO all the changes done in that commit (third commit), 
+which will then produce a result of second commit. Then, Git will AUTOMATICALLY perform a commit for us, resulting in an automated "fourth commit". 
+Running "git log" will return:
+commit 113c7897ee776885644775ed39e4d2b557a946b7 (HEAD -> master)
+    Revert "third commit"
+    This reverts commit 6d967aa6432533ae41b76d9c28c73cb45fe7fca7
+commit 6d967aa6432533ae41b76d9c28c73cb45fe7fca7
+    Comment: third commit
+commit 386a393813e9717e5b0a580de5b0b451804a6b71
+    Comment: second commit
+commit 8a28253e02bca12162967da2eff04a2a0b7f5568
+    Comment: first commit
+
+
 
 
 -----------------
