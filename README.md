@@ -31,9 +31,11 @@ Eg: git commit -m "Initial commit"
 - 'git commit --amend -m "[Insert the comment we want to replace with]"': --amend flag is a very useful and convinient flag for us to use when dealing with commits.
 Sometimes, we might want to fix a comment which we commited, maybe due to typo error, or just bad choice of words. We fix it with the --amend flag, which allow us to amend our previous commit. Note that we CANNOT specify a specific commit Id. We could only amend the very previous commit.
 
-- "git commit --amend --no-edit": When dealing with "git commit", adding the --amend flag along with "--no-edit" flag enables us to add staged changes (which we might have forgotten to add during committing), without updating the commit message. Very useful to keep note of.
+- "git commit --amend --no-edit": When dealing with "git commit", adding the --amend flag along with "--no-edit" flag enable us to add staged changes (which we might have forgotten to add during committing), without updating the commit message. Very useful to keep note of.
 
 - "git log": This will give us a log of all the past commits. If the log is too long, we could exit by pressing "q" button in the terminal.
+
+- "git log --graph --oneline --decorate": This will show git log with one line per commit, with a graph, displaying all the merging of branches.
 
 - 'git commit -a -m "[Insert message]"': This command is a shortcut for the combination of "git add ." and 'git commit -m "[Insert message]"'. 
 We could further shorten this command to 'git commit -am "[Insert message]"'
@@ -57,6 +59,10 @@ If we are unsure of what name/branch we should merge with, click on the branch a
 
 - "git merge --squash [Insert target branch to merge & squash]": This command will merge the target branch, into the currently checkout branch, as well as "squashing" (which literally mean to crush or squeeze something with force so that it becomes flat) everything commited in the target branch, so that the final result in the merged (checked-out) branch will only show the summary of "Merge branch [Target branch] into branch [Checked out branch]" in git log.
 Basically this is the same as merge, except for the fact that it leaves a clean git log history in the merged branch.
+
+- "git rebase [Insert target branch to merge with. Eg: master] [--interective or simply -i]": This command should only be done during the final phase, when we are done developing a feature inside a branch, ready to ber merged back into the master branch.
+This command brings up an interective window in Visual Studio Code, where we could see all the commits we did in the branch we want to squash, before merging with the target branch that we specified. In order to squash those commits into 1 commit, we need to replace those commits with the "pick" keywords inside that interective editor, and replace them all with "squash" keyword, and leave the final commit, which we want to produce the squash result with, intact. Once done, save the file, close the interective editor, where it will automatically bring up another file where we can customize the final commit message. If we want to stick with the default, just close the window directly.
+Finally, run "git log" to check and see all those commits within the branch we want to merge with the target branch, being "squashed" into one final commit.
 
 - "git rebase [Insert the target remote repo name/branch we want to merge from the remote repo with the local repo. Eg: origin/master]": Has the same purpose as merge, in we use it to merge two different branches. We usually use rebase when working with a forked repo, in our local repo, to be in sync with the upstream for the master or main branch.
 Before using rebase, remember the golden rule: Do NOT rebase any of our own repo into ANY public branches, potentially used by other developers. 
@@ -128,6 +134,28 @@ commit 386a393813e9717e5b0a580de5b0b451804a6b71
 commit 8a28253e02bca12162967da2eff04a2a0b7f5568
     Comment: first commit
 
+- "git stash": This command allows us to save our work for later, without commit it to the git repository. Useful when working with something experimental, not really worthy to commit it to the repository, but would still like to work on it later, because currently we might be working on something else more important. 
+When we execute "git stash", it will save our work, storing in Git's stash, which is like an array, and hiding those codes away from our view.
+Stashing is useful. However, be careful when trying to stash multiple stashes/states, because we might need up with stash conflicts in the end.
+
+- 'git stash save "[Insert comment here]"': This command allows us to stash with comments, so that we can keep track of the all the stashes.
+
+- "git stash pop": This will "pop" the latest "stash", applying the changes back into the code, showing it to us, which we previously stashed.
+
+- "git stash list": This will show the list of all the items in our stash, which we have previously stashed.
+
+- "git stash apply [Insert array number of the stash which we want to apply the changes back into our code.]": This command will allow us to specify a particular item in our stash to apply the changes back into our code, instead of just popping the latest stash.
+
+- "git stash drop [Insert array number of the stash which we want to drop/delete]": This command allows us to drop/delete a specified stash.
+
+- "git stash clear": This will clear and delete all the saved stash.
+
+---------------------
+Good to know commands
+---------------------
+
+- 'git config --global alias.[Insert shortcut keys or custom command keyword. Eg: ac] "[Insert command to execute. Eg: commit -am]"': This will allow us to setup a custom command, known as alias in the Git world, to execute the corresponding specified git command.
+For eg: By executing 'git config --global alias.ac "commit -am"', we could execute 'git ac "commit message"', which results in the same command as 'git commit -am "commit message"'.
 
 
 
@@ -216,6 +244,6 @@ In normal cases, where we don't have to deal with merge conflicts, merging and c
 GitHub cool features
 ------------------------
 
-- Did you know we could press the period "." button inside any repo to access the codespaces? A cloud-based version of VScode is also known as a codespace. 
+- Did you know we could press the period "." button inside any repo to access the online visual studio code? Everything should work as expected, except for the terminal command execution. If required, we need to create a codespace.
 It is a paid-per-second service. We could access the codespace according to our GitHub plans. Apparently, Free plan users could access it for 120 minutes per month. Just a good-to-know.
 
