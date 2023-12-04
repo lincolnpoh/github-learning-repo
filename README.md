@@ -112,6 +112,8 @@ This is kind of like the git pull, which combines two commands into one (fetch a
 - "git reset --hard [Insert commit ID we want to reset it back to. Eg: 63756711834cbb6a5e56c48db770bf1d440b2190]": This will allow us to HARD reset everything back to the specified commit ID. What this exactly mean is that, if we added or modified ANY files after the specified commit ID, files which have been added will be COMPLETELY DELETED, and files which were modified will be reset to the state of that commit ID we specified. This is a dangerous reset, so handle with care before proceed with executing this command. It is usually much safer to just execute without the "--hard" flag. 
 *** Be careful, DO NOT RESET code on a remote repository in GitHub if it has been PUSHED to it. Other developers might have already been working on that particular code, and if we were to remove it, chaos will fall upon all. If were have to, use "git revert" instead. More explanation below.
 
+- "git clean -df": This command will make sure to clean up our project folder to get rid of all the random untracked files or build artifacts here and there, after we try to make a "git reset --hard" operation to reset/rollback our local repository back to our remote repository state. 
+
 - "git revert [Insert commit ID to want to revert back to. Eg: 63756711834cbb6a5e56c48db770bf1d440b2190]": Revert command works almost like reset. It will also remove any files that were added after the specified commit ID. Also, revert is generally more safer to undo things, when compared to "git reset". Why?
 Because revert has one big difference compared with reset, in that instead of restoring to the point of commit Id where we specified, "git revert" will UNDO the changes we did on that particular specified commit ID, and perform an AUTO COMMIT AFTER UNDOING that commit Id. For eg, consider the following scenario:
 1) "git log" returns 3 commit Ids: 
@@ -150,14 +152,26 @@ Stashing is useful. However, be careful when trying to stash multiple stashes/st
 
 - "git stash clear": This will clear and delete all the saved stash.
 
+- "git bisect start ": This command starts the bisect operation, which is an operation that allows us to find a bad commit in Git, which have introduced a bug into our project. It works by 
+
+- "git bisect bad": This command allows us to mark the current HEAD, with the checked out branch, as a bad commit. 
+This will tell git that right now, at this point in time, the current HEAD has a bug. We STILL DO NOT KNOW at this point in time, whether if the current commit was the main culprit. What we do know is that the bug exists in the current HEAD, so we mark it as bad.
+
+- "git bisect good [Insert target commit Id which is considered to be good.]": This command will tell Git that the specified commit ID is a good commit, which does not have bugs in it. Take note that if we execute this command without specifying any commit ID, we are telling Git that the current HEAD with the checked out branch is a good commit.
+Once we have identified both good and bad commits, Git will start with interective bisect, which changes the HEAD to a previous commit ID, where we then again identify whether that particular commit ID is a good or bad one. This goes on until there is no more steps left. 
+Once we have identified the culprit commit ID, we will first end the bisect operation, with "git bisect reset". 
+Next we have to find out what the code is that introduced the bug, with the "git show [Insert commit ID here]" command. Git will show us the diff, between the current HEAD and the bad commit. If we figured that particular line of code IS actually indeed the culprit, we can do a revert operation to UNDO that bad code. Finally, execute "git log" to ensure everything is expected and we're good to go again.
+
+- "git bisect log": This will show us the current bisect log during a bisect operation.
+
+- "git bisect reset": This command will abort the current bisect operation and reset the state back to where we started, before performing the bisect operation.
+
 ---------------------
 Good to know commands
 ---------------------
 
 - 'git config --global alias.[Insert shortcut keys or custom command keyword. Eg: ac] "[Insert command to execute. Eg: commit -am]"': This will allow us to setup a custom command, known as alias in the Git world, to execute the corresponding specified git command.
 For eg: By executing 'git config --global alias.ac "commit -am"', we could execute 'git ac "commit message"', which results in the same command as 'git commit -am "commit message"'.
-
-
 
 -----------------
 Git knowledge
@@ -239,11 +253,29 @@ Once there is a merge conflict, we have to two options:
 2) solve the conflict. Then, we WILL have to manually make a commit (with the "git add ." and "git commit -m" commands, or simply "git commit -am" command), which is called a merge commit, which is required if we are dealing with conflicts. 
 In normal cases, where we don't have to deal with merge conflicts, merging and commiting happens automatically with a fast-forward. However, with merge conflicts, we handle the commit ourself.
 
+- Git Hooks: In Git, there is something called "hooks" that allows developers to automate self-defined custom scripts/tasks before or after git specified operations/events. This will ensure the overall code quality during the development life cycle. This is considered as a good-to-know, and considered advance stuff.
+There are several types of Git hooks, each with a specific purpose. For example, Pre-commit hooks can be used to enforce code formatting or run tests before a commit is made. Pre-push hooks can be used to prevent pushes to certain branches or run additional tests before pushing. Post-merge hooks can be used to perform actions after a merge is completed, such as generating documentation, etc. The list below is just a few examples of ideas for script behaviors that can be attached to git hooks:
+1) pre-commit: Check the commit message for spelling errors
+2) pre-receive: Enforce project coding standards
+3) post-commit: Email team members regarding the new commit
+4) post-receive: Push the code to production environment
+Hooks resides in the ".git/hooks" directory of every Git repository. In the default Visual studio code, it's hidden. To make the directory visible, go to [Preferences] > [Settings] > Search for "git" > Under "Files:Exclude", locate for "**/.git", edit it and add "//" or any other sharacters so that Visual studio code could not recognize it, and it's done.
+There are samples automatically generated for us to have a look. Those ".sample" extensionprevents them from being executed by default. To write a script from scratch. simply add a new file matching one of those samples, minus the ".sample" extension.
+Google for more resources regarding git hooks.
+
+- GitHub actions: Just like Git hooks, GitHub has something called GitHub actions. 
+When we talk about events in a GitHub, they include things like "star a GitHub repo", "pull request", issue created, pushing to master branch. All these GitHub events can trigger automated workflow that we can specify, that are known as jobs, which then ultimately run within containers. GitHub will log those steps, and inform if when something fails.
+Instead of writing from scratch, there are public actions available, made by the community, readily for us to integrate into our GitHub remote repository.
+Think of steps as a reusable chunk of code, which are called actions.
+
+- CI: This stands for Continuous integration. It's about merging new code into the main code base. We use GitHub actions to achieve CI in GitHub. 
+
+- CD: This stands for Continuous deployment. It's about pushing that code out to our customer, which means to release the code into production environment. Same as CI, we use Github actions to achieve CD in GitHub.
 
 ------------------------
 GitHub cool features
 ------------------------
 
-- Did you know we could press the period "." button inside any repo to access the online visual studio code? Everything should work as expected, except for the terminal command execution. If required, we need to create a codespace.
+- Did you know we could press the period "." button inside any repo to access codespace, which is basically an online version of visual studio code? 
+Everything should work as expected, except for the terminal command execution. If you need to work with the terminal, we might need to upgrade from a free tier to a paid plan codespace. 
 It is a paid-per-second service. We could access the codespace according to our GitHub plans. Apparently, Free plan users could access it for 120 minutes per month. Just a good-to-know.
-
