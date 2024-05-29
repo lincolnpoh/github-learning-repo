@@ -7,7 +7,7 @@ Git command cheatsheet
 
 - "git init": Setup Git for the current working project folder
 
-- "git config --list": Display all the current config info of Git
+- "git config --list": Display all the current config info of Git (After running this command, if we can't type any anything further, hit :q + Enter button)
 
 - "git config --global user.name": Set the user.name property for Git config
 
